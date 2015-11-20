@@ -44,20 +44,22 @@ public class Environment {
 		
 	}
 	
-	public static String getEmployeePosition(int id)
+	// Gets any Employee string field in employees table based
+	// on employee id and the field name you are looking for
+	public static String getEmployeeStrInfo(int id, String strPar)
 	{
 		try {
 			Connection conn = DriverManager.getConnection(DB_URL);
 			Statement stmt = conn.createStatement();
 			
-			String selectPosition = "select position from Employee "
-					+ String.format("where id = %d", id);
+			String selectInfo = String.format("select %s from Employee "
+					+ "where id = %d", strPar, id);
 			
-			ResultSet results = stmt.executeQuery(selectPosition);
+			ResultSet results = stmt.executeQuery(selectInfo);
 			
 			if(results.next())
 			{
-				return results.getString("position");
+				return results.getString(String.format("%s", strPar));
 			}
 		}
 		catch(SQLException e)
@@ -68,16 +70,29 @@ public class Environment {
 		return null;
 	}
 	
+	public static String getCityStateZip(int id)
+	{
+		String csz = "";
+		
+		csz = csz.concat(getEmployeeStrInfo(id, "city")+ " ");
+		csz = csz.concat(getEmployeeStrInfo(id, "state")+ ", ");
+		csz = csz.concat(getEmployeeStrInfo(id, "zip")+ " ");
+		
+		return csz;
+	}
+	
 	//This class will add an employee into the Employee table
-    public static void addEmployee(int id, String name, String position){
+    public static void addEmployee(int id, String name, String position, String street,
+    							String city, String state, String zip){
 		try {
 			//Insert employees to the Employee table
 			Connection conn = DriverManager.getConnection(DB_URL);
 			
 			Statement stmt = conn.createStatement();
 			
-			String insertEmployee = String.format("insert into Employee (id, name, position)"
-					+ " values (%d, '%s', '%s')", id, name, position);
+			String insertEmployee = String.format("insert into Employee (id, name, position, street, city, state, zip)"
+					+ " values (%d, '%s', '%s', '%s', '%s', '%s', '%s'"
+					+ ")", id, name, position, street, city, state, zip);
 			
 			stmt.executeUpdate(insertEmployee);
 			

@@ -31,15 +31,19 @@ public class BuildEnvironment {
 			String createTable = "create table Employee("
 					+ "id int not null primary key, "
 					+ "name varchar(50), "
-					+ "position varchar(50))"; 
+					+ "position varchar(50), "
+					+ "street varchar(50), "
+					+ "city varchar(50), "
+					+ "state varchar(50), "
+					+ "zip varchar(15))";
 
 			stmt.execute(createTable);
 
 			System.out.println("Employee table created.");
 			
-			for(int i=1; i<100; i++)
+			for(int i = 1; i<11; i++)
 			{
-				Environment.addEmployee(i, "Employee " + i, "Cashier");
+				Environment.addEmployee(i, "Employee ", "Cashier", "TestStreet St", "TestCityVille", "TS", "55555-5555");
 			}
 			
 			//Close the connection to the database

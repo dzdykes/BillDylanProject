@@ -21,7 +21,13 @@ public class FXController {
     
     @FXML
     private TextField tfInfoPos;
+    
+    @FXML
+    private TextField tfInfoStreet;
 
+    @FXML
+    private TextField tfInfoCSZ;
+    
     @FXML
     private ToggleGroup employeeType;
 
@@ -51,11 +57,16 @@ public class FXController {
     }
 
     @FXML
-    void dd0909(ActionEvent event) {
+    void buttonListenerLookUp(ActionEvent event) {;
     	String[] a = lvEmployees.getSelectionModel().getSelectedItem().split("-");
     	tfInfoName.setText(a[0].trim());
     	tfInfoId.setText(a[1].trim());
-    	tfInfoPos.setText(Environment.getEmployeePosition(Integer.parseInt(tfInfoId.getText())));
+    	
+    	final int ID = Integer.parseInt(tfInfoId.getText());
+    	
+    	tfInfoPos.setText(Environment.getEmployeeStrInfo(ID,"position"));
+    	tfInfoStreet.setText(Environment.getEmployeeStrInfo(ID,"street"));
+    	tfInfoCSZ.setText(Environment.getCityStateZip(ID));
     }
 
     @FXML
