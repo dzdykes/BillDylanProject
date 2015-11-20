@@ -30,7 +30,8 @@ public class BuildEnvironment {
 			//Create the table Employee
 			String createTable = "create table Employee("
 					+ "id int not null primary key, "
-					+ "name varchar(50))"; 
+					+ "name varchar(50), "
+					+ "position varchar(50))"; 
 
 			stmt.execute(createTable);
 
@@ -38,7 +39,7 @@ public class BuildEnvironment {
 			
 			for(int i=1; i<100; i++)
 			{
-				Environment.addEmployee(i, "Employee " + i);
+				Environment.addEmployee(i, "Employee " + i, "Cashier");
 			}
 			
 			//Close the connection to the database

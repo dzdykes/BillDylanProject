@@ -18,7 +18,7 @@
                      </font>
                   </Label>
                   <ListView fx:id="lvEmployees" cache="true" layoutX="14.0" layoutY="90.0" prefHeight="154.0" prefWidth="200.0" />
-                  <TextField fx:id="labelInfoName" layoutX="249.0" layoutY="103.0" />
+                  <TextField fx:id="tfInfoName" layoutX="249.0" layoutY="103.0" />
                   <RadioButton fx:id="rbHourly" layoutX="14.0" layoutY="59.0" mnemonicParsing="false" onAction="#rbHourlyListener" text="Hourlies">
                      <toggleGroup>
                         <ToggleGroup fx:id="employeeType" />
@@ -28,12 +28,12 @@
                   <Button layoutX="15.0" layoutY="244.0" mnemonicParsing="false" onAction="#dd0909" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: white;" text="Look Up Information" textFill="#203cc9" />
                   <Label layoutX="249.0" layoutY="82.0" text="Name:" />
                   <Label layoutX="433.0" layoutY="82.0" prefHeight="17.0" prefWidth="148.0" text="ID Number:" />
-                  <TextField fx:id="labelInfoName1" layoutX="433.0" layoutY="103.0" />
+                  <TextField fx:id="tfInfoId" layoutX="433.0" layoutY="103.0" />
                   <Label layoutX="250.0" layoutY="202.0" prefHeight="17.0" prefWidth="148.0" text="Address:" />
                   <TextField layoutX="249.0" layoutY="219.0" prefHeight="25.0" prefWidth="333.0" />
                   <TextField layoutX="249.0" layoutY="244.0" prefHeight="25.0" prefWidth="333.0" />
                   <Label layoutX="250.0" layoutY="137.0" prefHeight="17.0" prefWidth="51.0" text="Position:" />
-                  <TextField fx:id="labelInfoName2" layoutX="250.0" layoutY="155.0" />
+                  <TextField fx:id="tfInfoPos" layoutX="250.0" layoutY="155.0" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">

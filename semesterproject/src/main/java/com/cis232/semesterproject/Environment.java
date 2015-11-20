@@ -44,16 +44,40 @@ public class Environment {
 		
 	}
 	
+	public static String getEmployeePosition(int id)
+	{
+		try {
+			Connection conn = DriverManager.getConnection(DB_URL);
+			Statement stmt = conn.createStatement();
+			
+			String selectPosition = "select position from Employee "
+					+ String.format("where id = %d", id);
+			
+			ResultSet results = stmt.executeQuery(selectPosition);
+			
+			if(results.next())
+			{
+				return results.getString("position");
+			}
+		}
+		catch(SQLException e)
+		{
+			System.out.println("ERROR with position select sql statment.");
+		}
+		
+		return null;
+	}
+	
 	//This class will add an employee into the Employee table
-    public static void addEmployee(int id, String name){
+    public static void addEmployee(int id, String name, String position){
 		try {
 			//Insert employees to the Employee table
 			Connection conn = DriverManager.getConnection(DB_URL);
 			
 			Statement stmt = conn.createStatement();
 			
-			String insertEmployee = String.format("insert into Employee (id, name)"
-					+ " values (%d, '%s')", id, name);
+			String insertEmployee = String.format("insert into Employee (id, name, position)"
+					+ " values (%d, '%s', '%s')", id, name, position);
 			
 			stmt.executeUpdate(insertEmployee);
 			

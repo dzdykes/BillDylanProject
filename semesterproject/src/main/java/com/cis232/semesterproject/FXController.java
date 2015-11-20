@@ -14,7 +14,13 @@ import javafx.scene.control.ToggleGroup;
 public class FXController {
 
     @FXML
-    private TextField labelInfoName;
+    private TextField tfInfoName;
+    
+    @FXML
+    private TextField tfInfoId;
+    
+    @FXML
+    private TextField tfInfoPos;
 
     @FXML
     private ToggleGroup employeeType;
@@ -33,7 +39,7 @@ public class FXController {
 		ArrayList<String> empName = new ArrayList<>();
 		for(Employee e : Environment.getAllHourlyEmployee())
 		{
-			empName.add(e.getName());
+			empName.add(e.getName() + " - " + e.getId());
 		}
 		ObservableList<String> list = FXCollections.observableArrayList(empName);
 		lvEmployees.setItems(list);
@@ -46,6 +52,10 @@ public class FXController {
 
     @FXML
     void dd0909(ActionEvent event) {
+    	String[] a = lvEmployees.getSelectionModel().getSelectedItem().split("-");
+    	tfInfoName.setText(a[0].trim());
+    	tfInfoId.setText(a[1].trim());
+    	tfInfoPos.setText(Environment.getEmployeePosition(Integer.parseInt(tfInfoId.getText())));
     }
 
     @FXML
