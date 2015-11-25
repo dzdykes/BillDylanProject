@@ -1,11 +1,15 @@
 package com.cis232.semesterproject;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -67,6 +71,18 @@ public class FXController {
     	tfInfoPos.setText(Environment.getEmployeeStrInfo(ID,"position"));
     	tfInfoStreet.setText(Environment.getEmployeeStrInfo(ID,"street"));
     	tfInfoCSZ.setText(Environment.getCityStateZip(ID));
+    	
+    	Alert alert = new Alert(AlertType.CONFIRMATION);
+    	alert.setTitle("Confirmation Dialog");
+    	alert.setHeaderText("Look, a Confirmation Dialog");
+    	alert.setContentText("Are you ok with this?");
+
+    	Optional<ButtonType> result = alert.showAndWait();
+    	if (result.get() == ButtonType.OK){
+    	    // ... user chose OK
+    	} else {
+    	    // ... user chose CANCEL or closed the dialog
+    	}
     }
 
     @FXML

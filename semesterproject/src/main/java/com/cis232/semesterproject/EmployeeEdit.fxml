@@ -1,61 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.web.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cis232.semesterproject.FXController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cis232.semesterproject.FXController">
    <children>
-      <SplitPane dividerPositions="0.5" layoutX="330.0" layoutY="217.0" orientation="VERTICAL" prefHeight="183.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-               <children>
-                  <Label alignment="CENTER" layoutX="-1.0" layoutY="14.0" prefHeight="53.0" prefWidth="798.0" text="Employee Information">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                  </Label>
-                  <ListView fx:id="lvEmployees" cache="true" layoutX="14.0" layoutY="90.0" prefHeight="154.0" prefWidth="200.0" />
-                  <TextField fx:id="tfInfoName" layoutX="249.0" layoutY="103.0" />
-                  <RadioButton fx:id="rbHourly" layoutX="14.0" layoutY="59.0" mnemonicParsing="false" onAction="#rbHourlyListener" text="Hourlies">
-                     <toggleGroup>
-                        <ToggleGroup fx:id="employeeType" />
-                     </toggleGroup>
-                  </RadioButton>
-                  <RadioButton fx:id="rbSalary" layoutX="114.0" layoutY="59.0" mnemonicParsing="false" onAction="#rbSalaryListener" text="Salaried" toggleGroup="$employeeType" />
-                  <Button layoutX="15.0" layoutY="244.0" mnemonicParsing="false" onAction="#buttonListenerLookUp" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: white;" text="Look Up Information" textFill="#203cc9" />
-                  <Label layoutX="249.0" layoutY="82.0" text="Name:" />
-                  <Label layoutX="433.0" layoutY="82.0" prefHeight="17.0" prefWidth="148.0" text="ID Number:" />
-                  <TextField fx:id="tfInfoId" layoutX="433.0" layoutY="103.0" />
-                  <Label layoutX="250.0" layoutY="202.0" prefHeight="17.0" prefWidth="148.0" text="Address:" />
-                  <TextField fx:id="tfInfoStreet" layoutX="249.0" layoutY="219.0" prefHeight="25.0" prefWidth="333.0" />
-                  <TextField fx:id="tfInfoCSZ" layoutX="249.0" layoutY="244.0" prefHeight="25.0" prefWidth="333.0" />
-                  <Label layoutX="250.0" layoutY="137.0" prefHeight="17.0" prefWidth="51.0" text="Position:" />
-                  <TextField fx:id="tfInfoPos" layoutX="250.0" layoutY="155.0" />
-               </children>
-            </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-               <children>
-                  <Label layoutX="385.0" layoutY="14.0" />
-                  <Button layoutX="325.0" layoutY="12.0" mnemonicParsing="false" text="Write Paycheck" textFill="#dd0909">
-                     <font>
-                        <Font name="System Bold" size="17.0" />
-                     </font>
-                  </Button>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e5e8eb" height="225.0" layoutX="99.0" layoutY="63.0" stroke="BLACK" strokeType="INSIDE" width="596.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="102.0" AnchorPane.topAnchor="61.0" />
-                  <Label layoutX="114.0" layoutY="70.0" prefHeight="17.0" prefWidth="295.0" text="William Testperson" wrapText="true" />
-                  <Label layoutX="114.0" layoutY="87.0" prefHeight="17.0" prefWidth="295.0" text="2222 Teststreet Boulevard" wrapText="true" />
-                  <Label layoutX="114.0" layoutY="104.0" prefHeight="17.0" prefWidth="295.0" text="Testcity, TS 55-55555-555" wrapText="true" />
-                  <Label alignment="CENTER_RIGHT" layoutX="159.0" layoutY="157.0" prefHeight="20.0" prefWidth="452.0" text="Nine-Hundred Thirty-Three Dollars and 23 cents" wrapText="true">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </AnchorPane>
-        </items>
-      </SplitPane>
+      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+          <Tab text="Untitled Tab 1">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <Label alignment="CENTER" layoutX="-1.0" prefHeight="53.0" prefWidth="798.0" text="Employee Information">
+                                 <font>
+                                    <Font size="36.0" />
+                                 </font>
+                              </Label>
+                              <ListView fx:id="lvEmployees" cache="true" layoutX="14.0" layoutY="90.0" prefHeight="154.0" prefWidth="200.0" />
+                              <TextField fx:id="tfInfoName" editable="false" layoutX="249.0" layoutY="103.0" />
+                              <RadioButton fx:id="rbHourly" layoutX="14.0" layoutY="59.0" mnemonicParsing="false" onAction="#rbHourlyListener" text="Hourlies">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="employeeType" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton fx:id="rbSalary" layoutX="114.0" layoutY="59.0" mnemonicParsing="false" onAction="#rbSalaryListener" text="Salaried" toggleGroup="$employeeType" />
+                              <Button layoutX="15.0" layoutY="244.0" mnemonicParsing="false" onAction="#buttonListenerLookUp" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: white;" text="Look Up Information" textFill="#203cc9" />
+                              <Label layoutX="249.0" layoutY="82.0" text="Name:" />
+                              <Label layoutX="433.0" layoutY="82.0" prefHeight="17.0" prefWidth="148.0" text="ID Number:" />
+                              <TextField fx:id="tfInfoId" layoutX="433.0" layoutY="103.0" />
+                              <Label layoutX="250.0" layoutY="202.0" prefHeight="17.0" prefWidth="148.0" text="Address:" />
+                              <TextField fx:id="tfInfoStreet" layoutX="249.0" layoutY="219.0" prefHeight="25.0" prefWidth="333.0" />
+                              <TextField fx:id="tfInfoCSZ" layoutX="249.0" layoutY="244.0" prefHeight="25.0" prefWidth="333.0" />
+                              <Label layoutX="250.0" layoutY="137.0" prefHeight="21.0" prefWidth="123.0" text="Position:" />
+                              <TextField fx:id="tfInfoPos" layoutX="250.0" layoutY="155.0" />
+                              <TextField layoutX="786.0" layoutY="103.0" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab disable="false" text="Untitled Tab 2">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="564.0" prefWidth="700.0">
+                           <children>
+                              <Label layoutX="385.0" layoutY="14.0" />
+                              <Group layoutX="-47.0" layoutY="23.0">
+                                 <children>
+                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e5e8eb" height="225.0" layoutX="99.0" layoutY="64.0" stroke="BLACK" strokeType="INSIDE" width="596.0" AnchorPane.bottomAnchor="-64.0" AnchorPane.leftAnchor="99.0" AnchorPane.rightAnchor="-56.0" AnchorPane.topAnchor="64.0" />
+                                    <Label layoutX="124.0" layoutY="114.0" prefHeight="17.0" prefWidth="295.0" text="Testcity, TS 55-55555-555" wrapText="true" />
+                                    <Label layoutX="124.0" layoutY="80.0" prefHeight="17.0" prefWidth="295.0" text="William Testperson" wrapText="true" />
+                                    <Label layoutX="124.0" layoutY="97.0" prefHeight="17.0" prefWidth="295.0" text="2222 Teststreet Boulevard" wrapText="true" />
+                                    <Label alignment="CENTER_RIGHT" layoutX="171.0" layoutY="176.0" prefHeight="20.0" prefWidth="452.0" text="Nine-Hundred Thirty-Three Dollars and 23 cents" wrapText="true">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Group>
+                              <Group layoutX="-47.0" layoutY="248.0">
+                                 <children>
+                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e5e8eb" height="225.0" layoutX="99.0" layoutY="64.0" stroke="BLACK" strokeType="INSIDE" width="596.0" AnchorPane.bottomAnchor="-64.0" AnchorPane.leftAnchor="99.0" AnchorPane.rightAnchor="-56.0" AnchorPane.topAnchor="64.0" />
+                                    <Label layoutX="124.0" layoutY="114.0" prefHeight="17.0" prefWidth="295.0" text="Testcity, TS 55-55555-555" wrapText="true" />
+                                    <Label layoutX="124.0" layoutY="80.0" prefHeight="17.0" prefWidth="295.0" text="William Testperson" wrapText="true" />
+                                    <Label layoutX="124.0" layoutY="97.0" prefHeight="17.0" prefWidth="295.0" text="2222 Teststreet Boulevard" wrapText="true" />
+                                    <Label alignment="CENTER_RIGHT" layoutX="171.0" layoutY="176.0" prefHeight="20.0" prefWidth="452.0" text="Nine-Hundred Thirty-Three Dollars and 23 cents" wrapText="true">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Group>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
    </children>
 </AnchorPane>

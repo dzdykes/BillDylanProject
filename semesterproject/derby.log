@@ -1,10 +1,10 @@
 ----------------------------------------------------------------
-Fri Nov 20 13:23:10 EST 2015:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-0151-2622-bd87-00000696e630 
-on database directory C:\Users\Dylan\git\BillDylanProject\semesterproject\Personnel\Employee with class loader sun.misc.Launcher$AppClassLoader@659e0bfd 
+Tue Nov 24 18:33:16 EST 2015:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-0151-3bd8-1914-00000dfbcab8 
+on database directory C:\Users\Dylan\git\BillDylanProject\semesterproject\Personnel\Employee with class loader sun.misc.Launcher$AppClassLoader@4e0e2f2a 
 Loaded from file:/C:/Users/Dylan/.m2/repository/org/apache/derby/derby/10.12.1.1/derby-10.12.1.1.jar
 java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_65-b17
+java.runtime.version=1.8.0_60-b27
 user.dir=C:\Users\Dylan\git\BillDylanProject\semesterproject
 os.name=Windows 10
 os.arch=amd64
