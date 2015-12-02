@@ -38,6 +38,9 @@ public class FXController {
     private TextField tfInfoPayRate;
     
     @FXML
+    private TextField tfHours;
+    
+    @FXML
     private ToggleGroup employeeType;
 
     @FXML
@@ -57,7 +60,13 @@ public class FXController {
     
     @FXML
     private Label lblEditConfirm;
+    
+    @FXML
+    private Label lblNetPay;
 
+    @FXML
+    private Label lblCheckAmountString;
+    
     @FXML
     void rbHourlyListener(ActionEvent event) {
 		ArrayList<String> empName = new ArrayList<>();
@@ -133,6 +142,28 @@ public class FXController {
     	{
     		lblEditConfirm.setText("Error Could Not Update Employee");
     	}
+    }
+    
+    @FXML
+    private void buttonListenerCreatePaycheck(ActionEvent event)
+    {
+    	HourlyEmployee emp = new HourlyEmployee();
+    	emp.setId(Integer.parseInt(tfInfoId.getText()));
+    	emp.setName(tfInfoName.getText());
+    	emp.setPosition(tfInfoPos.getText());
+    	emp.setStreet(tfInfoStreet.getText());
+    	emp.setCity(Environment.getEmployeeStrInfo(emp.getId(), "city"));
+    	emp.setState(Environment.getEmployeeStrInfo(emp.getId(), "state"));
+    	emp.setZip(Environment.getEmployeeStrInfo(emp.getId(), "zip"));
+    	emp.setPayRate(Double.parseDouble(tfInfoPayRate.getText()));
+    	
+    	double hours = Double.parseDouble(tfHours.getText());
+    	
+    	emp.setHours(hours);
+    	
+    	lblNetPay.setText(String.format("%.2f", emp.getNetPay()));
+    	
+    	lblCheckAmountString.setText(CheckWriter.main(String.format("%.2f", emp.getNetPay())));
     }
 
 	private void clearTextFields() {

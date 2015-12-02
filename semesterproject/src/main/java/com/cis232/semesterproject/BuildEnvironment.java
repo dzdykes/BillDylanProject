@@ -45,7 +45,15 @@ public class BuildEnvironment {
 			
 			for(int i = 1; i<11; i++)
 			{
-				Employee newEmp = new Employee(i, "Employee ", "Cashier", "TestStreet St", "TestCityVille", "TS", "55555-5555", 15.15);
+				Employee newEmp = new HourlyEmployee();
+				newEmp.setId(i);
+				newEmp.setName("Employee ");
+				newEmp.setPosition("Cashier");
+				newEmp.setStreet("TestStreet St");
+				newEmp.setCity("TestCityVille");
+				newEmp.setState("TS");
+				newEmp.setZip("55555-5555");
+				newEmp.setPayRate(15.15);
 				Environment.addEmployee(newEmp, true);
 			}
 			
