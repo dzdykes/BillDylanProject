@@ -23,26 +23,30 @@
                                     <Font size="36.0" />
                                  </font>
                               </Label>
-                              <ListView fx:id="lvEmployees" cache="true" layoutX="14.0" layoutY="90.0" prefHeight="154.0" prefWidth="200.0" />
-                              <TextField fx:id="tfInfoName" editable="false" layoutX="249.0" layoutY="103.0" />
-                              <RadioButton fx:id="rbHourly" layoutX="14.0" layoutY="59.0" mnemonicParsing="false" onAction="#rbHourlyListener" text="Hourlies">
-                                 <toggleGroup>
-                                    <ToggleGroup fx:id="employeeType" />
-                                 </toggleGroup>
-                              </RadioButton>
-                              <RadioButton fx:id="rbSalary" layoutX="114.0" layoutY="59.0" mnemonicParsing="false" onAction="#rbSalaryListener" text="Salaried" toggleGroup="$employeeType" />
-                              <Button layoutX="15.0" layoutY="244.0" mnemonicParsing="false" onAction="#buttonListenerLookUp" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: white;" text="Look Up Information" textFill="#203cc9" />
-                              <Label layoutX="249.0" layoutY="82.0" text="Name:" />
-                              <Label layoutX="433.0" layoutY="82.0" prefHeight="17.0" prefWidth="148.0" text="ID Number:" />
-                              <TextField fx:id="tfInfoId" layoutX="433.0" layoutY="103.0" />
-                              <Label layoutX="250.0" layoutY="202.0" prefHeight="17.0" prefWidth="148.0" text="Address:" />
-                              <TextField fx:id="tfInfoStreet" layoutX="249.0" layoutY="219.0" prefHeight="25.0" prefWidth="333.0" />
-                              <TextField fx:id="tfInfoCSZ" layoutX="249.0" layoutY="244.0" prefHeight="25.0" prefWidth="333.0" />
-                              <Label layoutX="250.0" layoutY="137.0" prefHeight="21.0" prefWidth="123.0" text="Position:" />
-                              <TextField fx:id="tfInfoPos" layoutX="250.0" layoutY="155.0" />
                               <TextField layoutX="786.0" layoutY="103.0" />
                            </children>
                         </AnchorPane>
+                        <ListView fx:id="lvEmployees" cache="true" layoutX="76.0" layoutY="100.0" prefHeight="154.0" prefWidth="397.0" />
+                        <Button fx:id="butLookUp" layoutX="486.0" layoutY="207.0" mnemonicParsing="false" onAction="#buttonListenerLookUp" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: white;" text="Look Up Information" textFill="#203cc9" />
+                        <RadioButton fx:id="rbSalary" layoutX="538.0" layoutY="167.0" mnemonicParsing="false" onAction="#rbSalaryListener" text="Salaried">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="employeeType" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="rbHourly" layoutX="537.0" layoutY="119.0" mnemonicParsing="false" onAction="#rbHourlyListener" text="Hourlies" toggleGroup="$employeeType" />
+                        <Label layoutX="515.0" layoutY="328.0" prefHeight="17.0" prefWidth="148.0" text="Wage/Salary" />
+                        <TextField fx:id="tfInfoPayRate" layoutX="509.0" layoutY="349.0" prefHeight="31.0" prefWidth="151.0" />
+                        <TextField fx:id="tfInfoPos" layoutX="327.0" layoutY="349.0" prefHeight="31.0" prefWidth="186.0" />
+                        <Label layoutX="327.0" layoutY="331.0" prefHeight="21.0" prefWidth="123.0" text="Position:" />
+                        <TextField fx:id="tfInfoCSZ" layoutX="326.0" layoutY="445.0" prefHeight="25.0" prefWidth="333.0" />
+                        <TextField fx:id="tfInfoStreet" layoutX="326.0" layoutY="413.0" prefHeight="25.0" prefWidth="333.0" />
+                        <Label layoutX="327.0" layoutY="396.0" prefHeight="17.0" prefWidth="148.0" text="Address:" />
+                        <TextField fx:id="tfInfoId" layoutX="510.0" layoutY="297.0" prefHeight="31.0" prefWidth="148.0" />
+                        <Label layoutX="510.0" layoutY="276.0" prefHeight="17.0" prefWidth="148.0" text="ID Number:" />
+                        <Label layoutX="326.0" layoutY="276.0" text="Name:" />
+                        <TextField fx:id="tfInfoName" layoutX="326.0" layoutY="297.0" />
+                        <Button fx:id="butEdit" layoutX="326.0" layoutY="496.0" mnemonicParsing="false" onAction="#buttonListenerEdit" prefHeight="31.0" prefWidth="177.0" text="Edit Employee" />
+                        <Label fx:id="lblEditConfirm" layoutX="327.0" layoutY="527.0" prefHeight="21.0" prefWidth="373.0" />
                      </children>
                   </AnchorPane>
             </content>

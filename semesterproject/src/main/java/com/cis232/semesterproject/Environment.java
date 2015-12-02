@@ -7,8 +7,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
 
-public class Environment {
+public class Environment extends FXController {
 	final static String DB_URL = "jdbc:derby:Personnel/Employee;create=true";
 	
 	//This method will find an employee based on their Employee ID
@@ -21,8 +23,8 @@ public class Environment {
 			
 			Statement stmt = conn.createStatement();
 			
-			String selectEmployee = "select * from Employee";
-					//+ String.format("where isHourly = true");
+			String selectEmployee = "select * from Employee "
+					+ String.format("where isHourly = true");
 			
 			ResultSet results = stmt.executeQuery(selectEmployee);
 			
@@ -41,9 +43,38 @@ public class Environment {
 			System.out.println("ERROR with sql statement.");
 			return null;
 		}
-		
 	}
 	
+	public static ArrayList<Employee> getAllSalaryEmployee()
+	{
+		try {	
+			ArrayList<Employee> salaryEmp = new ArrayList<>();
+			
+			Connection conn = DriverManager.getConnection(DB_URL);
+			
+			Statement stmt = conn.createStatement();
+			
+			String selectEmployee = "select * from Employee "
+					+ String.format("where isHourly = false");
+			
+			ResultSet results = stmt.executeQuery(selectEmployee);
+			
+			while(results.next())
+			{
+				Employee emp = new Employee();
+				emp.setId(results.getInt("id"));
+				emp.setName(results.getString("name"));
+				salaryEmp.add(emp);
+			}
+			
+			conn.close();
+			
+			return salaryEmp;
+			} catch (SQLException e) {
+			System.out.println("ERROR with sql statement.");
+			return null;
+		}
+	}
 	// Gets any Employee string field in employees table based
 	// on employee id and the field name you are looking for
 	public static String getEmployeeStrInfo(int id, String strPar)
@@ -52,6 +83,8 @@ public class Environment {
 			Connection conn = DriverManager.getConnection(DB_URL);
 			Statement stmt = conn.createStatement();
 			
+			String strInfo = "";
+			
 			String selectInfo = String.format("select %s from Employee "
 					+ "where id = %d", strPar, id);
 			
@@ -59,8 +92,13 @@ public class Environment {
 			
 			if(results.next())
 			{
-				return results.getString(String.format("%s", strPar));
+				strInfo = results.getString(String.format("%s", strPar));
 			}
+			
+			conn.close();
+			
+			return strInfo;
+			
 		}
 		catch(SQLException e)
 		{
@@ -82,17 +120,17 @@ public class Environment {
 	}
 	
 	//This class will add an employee into the Employee table
-    public static void addEmployee(int id, String name, String position, String street,
-    							String city, String state, String zip){
+    public static void addEmployee(Employee emp, boolean isHourly){
 		try {
 			//Insert employees to the Employee table
 			Connection conn = DriverManager.getConnection(DB_URL);
 			
 			Statement stmt = conn.createStatement();
 			
-			String insertEmployee = String.format("insert into Employee (id, name, position, street, city, state, zip)"
-					+ " values (%d, '%s', '%s', '%s', '%s', '%s', '%s'"
-					+ ")", id, name, position, street, city, state, zip);
+			String insertEmployee = String.format("insert into Employee (id, name, position, street, city, state, zip, payRate, isHourly)"
+					+ " values (%d, '%s', '%s', '%s', '%s', '%s', '%s', %f, %s"
+					+ ")", emp.getId(), emp.getName(), emp.getPosition(), emp.getStreet()
+					, emp.getCity(), emp.getState(), emp.getZip(), emp.getPayRate(), isHourly);
 			
 			stmt.executeUpdate(insertEmployee);
 			
@@ -100,23 +138,34 @@ public class Environment {
 			
 			conn.close();
 		} catch (SQLException e) {
-			System.out.println("ERROR with sql statement.");
+			System.out.println("ERROR with sql insert statement.");
 		}
 	}
     
     //This class will update an employee in the Employee table
-    public static void updateEmployee(int employeeId, String employeeName, String position, double hourlyPayRate){
+    public static void updateEmployee(Employee emp){
     	try {		
 			//Update employees from Employee table
 			Connection conn = DriverManager.getConnection(DB_URL);
-    		
-    		Statement stmt = conn.createStatement();
 			
-			String editEmployeeById = "update Employee "
-					+String.format("set employeeName = '%s', ", employeeName)
-					+String.format("position = '%s', ", position)
-					+String.format("hourlyPayRate = %.2f ", hourlyPayRate)
-					+String.format("where employeeId = %d", employeeId );
+    		Statement stmt = conn.createStatement();
+    		
+			String editEmployeeById = String.format("update Employee "
+					+"set name = '%s', position = '%s', street = '%s', "
+					+ "city = '%s', state = '%s', zip = '%s', payRate = %f "
+					+ "where id = %d", emp.getName(), emp.getPosition(), emp.getStreet(), emp.getCity(), emp.getState(), emp.getZip(), emp.getPayRate(), emp.getId());
+			
+//    		String editEmployeeById = String.format("update Employee "
+//    				+ "set name = '%s' where id = %d", emp.getName(), emp.getId());
+//					
+//			System.out.println(editEmployeeById);
+			
+//			String editEmployeeById = String.format("update Employee "
+//					+"set '%s' = '%s', ", strPar, emp.getName() );
+//					+String.format("position = '%s', ", )
+//					+String.format("hourlyPayRate = %.2f ", hourlyPayRate)
+//					+String.format("")
+//					+String.format("where employeeId = %d", employeeId );
 			
 			stmt.executeUpdate(editEmployeeById);
 			
@@ -125,4 +174,5 @@ public class Environment {
 			System.out.println("ERROR with sql statement");
 		}
     }
+    
 }

@@ -35,7 +35,9 @@ public class BuildEnvironment {
 					+ "street varchar(50), "
 					+ "city varchar(50), "
 					+ "state varchar(50), "
-					+ "zip varchar(15))";
+					+ "zip varchar(15), "
+					+ "payRate double, "
+					+ "isHourly boolean)";
 
 			stmt.execute(createTable);
 
@@ -43,9 +45,15 @@ public class BuildEnvironment {
 			
 			for(int i = 1; i<11; i++)
 			{
-				Environment.addEmployee(i, "Employee ", "Cashier", "TestStreet St", "TestCityVille", "TS", "55555-5555");
+				Employee newEmp = new Employee(i, "Employee ", "Cashier", "TestStreet St", "TestCityVille", "TS", "55555-5555", 15.15);
+				Environment.addEmployee(newEmp, true);
 			}
 			
+			for(int i = 12; i<22; i++)
+			{
+				Employee newEmp = new Employee(i, "Semployee ", "Cashier", "TestStreet St", "TestCityVille", "TS", "55555-5555", 300000.00);
+				Environment.addEmployee(newEmp, false);
+			}
 			//Close the connection to the database
 			conn.close();
 		} catch (SQLException e) {
