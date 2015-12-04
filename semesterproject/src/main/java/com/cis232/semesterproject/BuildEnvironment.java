@@ -43,7 +43,7 @@ public class BuildEnvironment {
 
 			System.out.println("Employee table created.");
 			
-			for(int i = 1; i<11; i++)
+			for(int i = 1; i<15; i++)
 			{
 				Employee newEmp = new HourlyEmployee();
 				newEmp.setId(i);
@@ -57,7 +57,7 @@ public class BuildEnvironment {
 				Environment.addEmployee(newEmp, true);
 			}
 			
-			for(int i = 12; i<22; i++)
+			for(int i = 15; i<21; i++)
 			{
 				Employee newEmp = new Employee(i, "Semployee ", "Cashier", "TestStreet St", "TestCityVille", "TS", "55555-5555", 300000.00);
 				Environment.addEmployee(newEmp, false);

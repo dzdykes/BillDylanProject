@@ -155,18 +155,6 @@ public class Environment extends FXController {
 					+ "city = '%s', state = '%s', zip = '%s', payRate = %f "
 					+ "where id = %d", emp.getName(), emp.getPosition(), emp.getStreet(), emp.getCity(), emp.getState(), emp.getZip(), emp.getPayRate(), emp.getId());
 			
-//    		String editEmployeeById = String.format("update Employee "
-//    				+ "set name = '%s' where id = %d", emp.getName(), emp.getId());
-//					
-//			System.out.println(editEmployeeById);
-			
-//			String editEmployeeById = String.format("update Employee "
-//					+"set '%s' = '%s', ", strPar, emp.getName() );
-//					+String.format("position = '%s', ", )
-//					+String.format("hourlyPayRate = %.2f ", hourlyPayRate)
-//					+String.format("")
-//					+String.format("where employeeId = %d", employeeId );
-			
 			stmt.executeUpdate(editEmployeeById);
 			
 			conn.close();

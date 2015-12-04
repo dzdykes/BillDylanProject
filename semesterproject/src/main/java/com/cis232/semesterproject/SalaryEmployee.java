@@ -17,7 +17,7 @@ public class SalaryEmployee extends Employee implements PayableEmployee {
 	public double getGrossPay() {
 		// TODO Auto-generated method stub
 		double bonus=0.0;
-		if(hours>100)
+		if(hours>=100)
 		{
 			bonus=(payRate/52)*.2;
 		}

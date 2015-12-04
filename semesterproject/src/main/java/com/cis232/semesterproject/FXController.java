@@ -1,5 +1,6 @@
 package com.cis232.semesterproject;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -11,6 +12,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
@@ -69,25 +71,27 @@ public class FXController {
     private Label lblCheckAmountString;
     
     @FXML
+    private Label lblName;
+    
+    @FXML
+    private Label lblStreet;
+    
+    @FXML
+    private Label lblCSZ;
+    
+    @FXML
+    private Label lblCheckDate;
+    
+    @FXML DatePicker dpPayDate;
+    
+    @FXML
     void rbHourlyListener(ActionEvent event) {
-		ArrayList<String> empName = new ArrayList<>();
-		for(Employee e : Environment.getAllHourlyEmployee())
-		{
-			empName.add(e.getName() + " - " + e.getId());
-		}
-		ObservableList<String> list = FXCollections.observableArrayList(empName);
-		lvEmployees.setItems(list);
+		populateHourlyEmployee();
     }
     
     @FXML
     void rbSalaryListener(ActionEvent event) {
-    	ArrayList<String> empName = new ArrayList<>();
-		for(Employee e : Environment.getAllSalaryEmployee())
-		{
-			empName.add(e.getName() + " - " + e.getId());
-		}
-		ObservableList<String> list = FXCollections.observableArrayList(empName);
-		lvEmployees.setItems(list);
+    	populateSalaryEmployee();
     }
 
     @FXML
@@ -136,18 +140,29 @@ public class FXController {
 	    	emp.setState(Environment.getEmployeeStrInfo(emp.getId(), "state"));
 	    	emp.setZip(Environment.getEmployeeStrInfo(emp.getId(), "zip"));
 	    	emp.setPayRate(Double.parseDouble(tfInfoPayRate.getText()));
-    	
         	Environment.updateEmployee(emp);
+        	
     		lblEditConfirm.setText("Employee Updated");
     	}catch(Exception e)
     	{
     		lblEditConfirm.setText("Error Could Not Update Employee");
+    	}
+    	
+    	if(rbHourly.isSelected())
+    	{
+    		populateHourlyEmployee();
+    	}else if(rbSalary.isSelected())
+    	{
+    		populateSalaryEmployee();
     	}
     }
     
     @FXML
     private void buttonListenerCreatePaycheck(ActionEvent event)
     {
+    	LocalDate d = dpPayDate.getValue();
+    	lblCheckDate.setText(d.toString());
+    	
     	double netPay = 0;
     	
     	if(rbHourly.isSelected())
@@ -187,7 +202,10 @@ public class FXController {
         	
         	netPay = emp.getNetPay();
     	}
-    	
+
+    	lblName.setText(tfInfoName.getText());
+    	lblStreet.setText(tfInfoStreet.getText());
+    	lblCSZ.setText(tfInfoCSZ.getText());
     	lblNetPay.setText(String.format("%.2f", netPay));
     	
     	lblCheckAmountString.setText(CheckWriter.main(String.format("%.2f", netPay)));
@@ -225,6 +243,28 @@ public class FXController {
 	    	}
 		}
     	
+    }
+    
+    private void populateHourlyEmployee()
+    {
+    	ArrayList<String> empName = new ArrayList<>();
+		for(Employee e : Environment.getAllHourlyEmployee())
+		{
+			empName.add(e.getName() + " - " + e.getId());
+		}
+		ObservableList<String> list = FXCollections.observableArrayList(empName);
+		lvEmployees.setItems(list);
+    }
+    
+    private void populateSalaryEmployee()
+    {
+    	ArrayList<String> empName = new ArrayList<>();
+		for(Employee e : Environment.getAllSalaryEmployee())
+		{
+			empName.add(e.getName() + " - " + e.getId());
+		}
+		ObservableList<String> list = FXCollections.observableArrayList(empName);
+		lvEmployees.setItems(list);
     }
 
 	private void clearTextFields() {
