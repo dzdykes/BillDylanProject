@@ -16,6 +16,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.MouseEvent;
 
 public class FXController {
 
@@ -147,23 +148,83 @@ public class FXController {
     @FXML
     private void buttonListenerCreatePaycheck(ActionEvent event)
     {
-    	HourlyEmployee emp = new HourlyEmployee();
-    	emp.setId(Integer.parseInt(tfInfoId.getText()));
-    	emp.setName(tfInfoName.getText());
-    	emp.setPosition(tfInfoPos.getText());
-    	emp.setStreet(tfInfoStreet.getText());
-    	emp.setCity(Environment.getEmployeeStrInfo(emp.getId(), "city"));
-    	emp.setState(Environment.getEmployeeStrInfo(emp.getId(), "state"));
-    	emp.setZip(Environment.getEmployeeStrInfo(emp.getId(), "zip"));
-    	emp.setPayRate(Double.parseDouble(tfInfoPayRate.getText()));
+    	double netPay = 0;
     	
-    	double hours = Double.parseDouble(tfHours.getText());
+    	if(rbHourly.isSelected())
+    	{
+    		HourlyEmployee emp = new HourlyEmployee();
+    		 
+        	emp.setId(Integer.parseInt(tfInfoId.getText()));
+        	emp.setName(tfInfoName.getText());
+        	emp.setPosition(tfInfoPos.getText());
+        	emp.setStreet(tfInfoStreet.getText());
+        	emp.setCity(Environment.getEmployeeStrInfo(emp.getId(), "city"));
+        	emp.setState(Environment.getEmployeeStrInfo(emp.getId(), "state"));
+        	emp.setZip(Environment.getEmployeeStrInfo(emp.getId(), "zip"));
+        	emp.setPayRate(Double.parseDouble(tfInfoPayRate.getText()));
+        	
+        	double hours = Double.parseDouble(tfHours.getText());
+        	
+        	emp.setHours(hours);
+        	
+        	netPay = emp.getNetPay();
+    	}else if(rbSalary.isSelected())
+    	{
+    		SalaryEmployee emp = new SalaryEmployee();
+    		 
+        	emp.setId(Integer.parseInt(tfInfoId.getText()));
+        	emp.setName(tfInfoName.getText());
+        	emp.setPosition(tfInfoPos.getText());
+        	emp.setStreet(tfInfoStreet.getText());
+        	emp.setCity(Environment.getEmployeeStrInfo(emp.getId(), "city"));
+        	emp.setState(Environment.getEmployeeStrInfo(emp.getId(), "state"));
+        	emp.setZip(Environment.getEmployeeStrInfo(emp.getId(), "zip"));
+        	emp.setPayRate(Double.parseDouble(tfInfoPayRate.getText()));
+        	
+        	double hours = Double.parseDouble(tfHours.getText());
+        	
+        	emp.setHours(hours);
+        	
+        	netPay = emp.getNetPay();
+    	}
     	
-    	emp.setHours(hours);
+    	lblNetPay.setText(String.format("%.2f", netPay));
     	
-    	lblNetPay.setText(String.format("%.2f", emp.getNetPay()));
+    	lblCheckAmountString.setText(CheckWriter.main(String.format("%.2f", netPay)));
+    }
+    
+    @FXML
+    private void lvListenerGetEmployeeInfo(MouseEvent event)
+    {
+    	try {
+			clearTextFields();
+			
+			String[] a = lvEmployees.getSelectionModel().getSelectedItem().split("-");
+			tfInfoName.setText(a[0].trim());
+			tfInfoId.setText(a[1].trim());
+			
+			final int ID = Integer.parseInt(tfInfoId.getText());
+			
+			tfInfoPos.setText(Environment.getEmployeeStrInfo(ID,"position"));
+			tfInfoStreet.setText(Environment.getEmployeeStrInfo(ID,"street"));
+			tfInfoCSZ.setText(Environment.getCityStateZip(ID));
+			tfInfoPayRate.setText(Environment.getEmployeeStrInfo(ID, "payRate"));
+			
+		} catch (Exception e) {
+			Alert alert;
+			
+			alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("Error Message");
+			alert.setHeaderText("Whoops you did not select an Employee.");
+			alert.setContentText("Try again.");
+			Optional<ButtonType> result = alert.showAndWait();
+			if (result.get() == ButtonType.OK){
+	    	    // ... user chose OK
+	    	} else {
+	    	    // ... user chose CANCEL or closed the dialog
+	    	}
+		}
     	
-    	lblCheckAmountString.setText(CheckWriter.main(String.format("%.2f", emp.getNetPay())));
     }
 
 	private void clearTextFields() {
@@ -173,6 +234,7 @@ public class FXController {
     	tfInfoStreet.clear();
     	tfInfoCSZ.clear();
     	tfInfoPayRate.clear();
+    	tfHours.clear();
     	lblEditConfirm.setText("");
 	}
 }

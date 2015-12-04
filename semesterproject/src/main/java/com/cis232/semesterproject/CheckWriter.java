@@ -70,8 +70,7 @@ public class CheckWriter {
 					tenThousands=0,
 					hundredThousands=0,
 					millions=0;
-			String checkDol="",
-					strMil="",
+			String 	strMil="",
 					strHunTh="",
 					strTenTh="",
 					strHun="",

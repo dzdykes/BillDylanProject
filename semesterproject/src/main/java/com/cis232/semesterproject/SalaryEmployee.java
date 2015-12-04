@@ -1,10 +1,8 @@
 package com.cis232.semesterproject;
 
-public class HourlyEmployee extends Employee implements PayableEmployee{
-	
+public class SalaryEmployee extends Employee implements PayableEmployee {
 	double hours;
-
-	@Override
+	
 	public void setHours(double hours)
 	{
 		this.hours=hours;
@@ -14,28 +12,28 @@ public class HourlyEmployee extends Employee implements PayableEmployee{
 	{
 		return hours;
 	}
-
+	
+	@Override
 	public double getGrossPay() {
 		// TODO Auto-generated method stub
-		if(hours<=70){
-			return hours*payRate;
-		}else
+		double bonus=0.0;
+		if(hours>100)
 		{
-			return ((70*payRate)+((hours-70)*payRate*1.5));
+			bonus=(payRate/52)*.2;
 		}
+		return ((payRate/52) + bonus);
 	}
 
+	@Override
 	public double getTaxes() {
 		// TODO Auto-generated method stub
-		return getGrossPay()*.23;
+		return (payRate/52)*.23;
 	}
 
+	@Override
 	public double getNetPay() {
 		// TODO Auto-generated method stub
 		return getGrossPay()-getTaxes();
 	}
 	
-	public Employee getAllPayable() {
-		return null;
-	}
 }

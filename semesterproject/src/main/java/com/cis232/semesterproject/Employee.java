@@ -9,6 +9,7 @@ public class Employee {
 	String state;
 	String zip;
 	double payRate;
+	double hours;
 	
 	public Employee(){
 		id=0;
@@ -105,5 +106,9 @@ public class Employee {
 	public void setPayRate(double payRate)
 	{
 		this.payRate = payRate;
+	}
+
+	public void setHours(double hours) {
+		this.hours=hours;
 	}
 }

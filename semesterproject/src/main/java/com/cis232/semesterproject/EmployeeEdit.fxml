@@ -26,7 +26,7 @@
                               <TextField layoutX="786.0" layoutY="103.0" />
                            </children>
                         </AnchorPane>
-                        <ListView fx:id="lvEmployees" cache="true" layoutX="76.0" layoutY="100.0" prefHeight="154.0" prefWidth="397.0" />
+                        <ListView fx:id="lvEmployees" cache="true" layoutX="76.0" layoutY="100.0" onMouseClicked="#lvListenerGetEmployeeInfo" prefHeight="154.0" prefWidth="397.0" />
                         <Button fx:id="butLookUp" layoutX="486.0" layoutY="207.0" mnemonicParsing="false" onAction="#buttonListenerLookUp" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: white;" text="Look Up Information" textFill="#203cc9" />
                         <RadioButton fx:id="rbSalary" layoutX="538.0" layoutY="167.0" mnemonicParsing="false" onAction="#rbSalaryListener" text="Salaried">
                            <toggleGroup>
@@ -54,6 +54,8 @@
                         </TextField>
                         <Label alignment="CENTER" contentDisplay="CENTER" layoutY="331.0" prefHeight="21.0" prefWidth="311.0" text="Enter Hours For This Week" />
                         <Button layoutX="92.0" layoutY="444.0" mnemonicParsing="false" onAction="#buttonListenerCreatePaycheck" text="Create Paycheck" />
+                        <DatePicker layoutX="144.0" layoutY="50.0" />
+                        <DatePicker layoutX="364.0" layoutY="50.0" />
                      </children>
                   </AnchorPane>
             </content>
