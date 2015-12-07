@@ -85,6 +85,36 @@ public class FXController {
     @FXML DatePicker dpPayDate;
     
     @FXML
+    private TextField tfOvHrs;
+    
+    @FXML
+    private TextField tfTaxes;
+    
+    @FXML
+    private Label lbHours;
+    
+    @FXML
+    private Label  lbOvtHrs;
+    
+    @FXML
+    private Label  lbtaxes;
+    
+    @FXML
+    private Label  lbgrsPay;
+    
+    @FXML
+    private Label  lbTaxes;
+    
+    @FXML
+    private Label  lbPosition;
+    
+    @FXML
+    private Label  lbPayPer;
+    
+    @FXML
+    private Label  lbPayRate;
+    
+    @FXML
     void rbHourlyListener(ActionEvent event) {
 		populateHourlyEmployee();
     }
@@ -177,6 +207,11 @@ public class FXController {
         	emp.setState(Environment.getEmployeeStrInfo(emp.getId(), "state"));
         	emp.setZip(Environment.getEmployeeStrInfo(emp.getId(), "zip"));
         	emp.setPayRate(Double.parseDouble(tfInfoPayRate.getText()));
+        	emp.setHours(Double.parseDouble(lbHours.getText()));
+        	emp.setPayRate(Double.parseDouble(lbPayRate.getText()));
+        	emp.setGrosspay(Double.parseDouble(lbgrsPay.getText()));
+        	emp.setNetPay(Double.parseDouble(lblNetPay.getText()));
+        	
         	
         	double hours = Double.parseDouble(tfHours.getText());
         	

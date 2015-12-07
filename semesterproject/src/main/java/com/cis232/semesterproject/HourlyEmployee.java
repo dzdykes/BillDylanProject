@@ -38,4 +38,14 @@ public class HourlyEmployee extends Employee implements PayableEmployee{
 	public Employee getAllPayable() {
 		return null;
 	}
+
+	public void setGrosspay(double parseDouble) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setNetPay(double parseDouble) {
+		// TODO Auto-generated method stub
+		
+	}
 }
