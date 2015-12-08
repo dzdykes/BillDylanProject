@@ -14,15 +14,10 @@
         <tabs>
           <Tab text="Employee Info">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white; -fx-border-color: red; -fx-border-width: 15px; -fx-background-image: C:\Users\Dylan\Desktop\sax.jpg;">
                      <children>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                            <children>
-                              <Label alignment="CENTER" layoutX="-1.0" prefHeight="53.0" prefWidth="700.0" text="Employee Information">
-                                 <font>
-                                    <Font size="36.0" />
-                                 </font>
-                              </Label>
                               <TextField layoutX="786.0" layoutY="103.0" />
                            </children>
                         </AnchorPane>
@@ -55,6 +50,11 @@
                         <Label alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="287.0" prefHeight="21.0" prefWidth="311.0" text="Enter Hours For This Week" />
                         <Button layoutX="96.0" layoutY="445.0" mnemonicParsing="false" onAction="#buttonListenerCreatePaycheck" text="Create Paycheck" />
                         <DatePicker fx:id="dpPayDate" layoutX="61.0" layoutY="316.0" />
+                        <Label alignment="CENTER" layoutX="-2.0" layoutY="14.0" prefHeight="53.0" prefWidth="700.0" text="Paycheck Writer">
+                           <font>
+                              <Font size="36.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
             </content>

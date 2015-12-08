@@ -207,10 +207,10 @@ public class FXController {
         	emp.setState(Environment.getEmployeeStrInfo(emp.getId(), "state"));
         	emp.setZip(Environment.getEmployeeStrInfo(emp.getId(), "zip"));
         	emp.setPayRate(Double.parseDouble(tfInfoPayRate.getText()));
-        	emp.setHours(Double.parseDouble(lbHours.getText()));
-        	emp.setPayRate(Double.parseDouble(lbPayRate.getText()));
-        	emp.setGrosspay(Double.parseDouble(lbgrsPay.getText()));
-        	emp.setNetPay(Double.parseDouble(lblNetPay.getText()));
+        	lbHours.setText(emp.getHours()+"");
+        	lbPayRate.setText(emp.getPayRate()+"");
+        	lbgrsPay.setText(emp.getGrossPay()+"");
+        	lblNetPay.setText(emp.getNetPay()+"");
         	
         	
         	double hours = Double.parseDouble(tfHours.getText());
