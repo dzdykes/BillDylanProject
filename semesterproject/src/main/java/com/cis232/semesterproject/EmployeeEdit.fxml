@@ -14,7 +14,7 @@
         <tabs>
           <Tab text="Employee Info">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white; -fx-border-color: red; -fx-border-width: 15px; -fx-background-image: C:\Users\Dylan\Desktop\sax.jpg;">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white; -fx-border-color: red; -fx-border-width: 5px;">
                      <children>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                            <children>
@@ -22,7 +22,6 @@
                            </children>
                         </AnchorPane>
                         <ListView fx:id="lvEmployees" cache="true" layoutX="76.0" layoutY="100.0" onMouseClicked="#lvListenerGetEmployeeInfo" prefHeight="154.0" prefWidth="397.0" />
-                        <Button fx:id="butLookUp" layoutX="486.0" layoutY="207.0" mnemonicParsing="false" onAction="#buttonListenerLookUp" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: white;" text="Look Up Information" textFill="#203cc9" />
                         <RadioButton fx:id="rbSalary" layoutX="538.0" layoutY="167.0" mnemonicParsing="false" onAction="#rbSalaryListener" text="Salaried">
                            <toggleGroup>
                               <ToggleGroup fx:id="employeeType" />
@@ -42,24 +41,26 @@
                         <TextField fx:id="tfInfoName" layoutX="326.0" layoutY="297.0" />
                         <Button fx:id="butEdit" layoutX="326.0" layoutY="496.0" mnemonicParsing="false" onAction="#buttonListenerEdit" prefHeight="31.0" prefWidth="177.0" text="Edit Employee" />
                         <Label fx:id="lblEditConfirm" layoutX="327.0" layoutY="527.0" prefHeight="21.0" prefWidth="373.0" />
-                        <TextField fx:id="tfHours" alignment="CENTER" layoutX="109.0" layoutY="364.0" prefHeight="65.0" prefWidth="102.0">
+                        <TextField fx:id="tfHours" alignment="CENTER" layoutX="110.0" layoutY="407.0" prefHeight="65.0" prefWidth="102.0">
                            <font>
                               <Font size="30.0" />
                            </font>
                         </TextField>
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="287.0" prefHeight="21.0" prefWidth="311.0" text="Enter Hours For This Week" />
-                        <Button layoutX="96.0" layoutY="445.0" mnemonicParsing="false" onAction="#buttonListenerCreatePaycheck" text="Create Paycheck" />
-                        <DatePicker fx:id="dpPayDate" layoutX="61.0" layoutY="316.0" />
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="380.0" prefHeight="21.0" prefWidth="311.0" text="Enter Hours For This Week" />
+                        <Button layoutX="96.0" layoutY="481.0" mnemonicParsing="false" onAction="#buttonListenerCreatePaycheck" text="Create Paycheck" />
+                        <DatePicker fx:id="dpPayDate" layoutX="53.0" layoutY="326.0" />
                         <Label alignment="CENTER" layoutX="-2.0" layoutY="14.0" prefHeight="53.0" prefWidth="700.0" text="Paycheck Writer">
                            <font>
                               <Font size="36.0" />
                            </font>
                         </Label>
+                        <Label alignment="CENTER" layoutX="54.0" layoutY="297.0" prefHeight="21.0" prefWidth="221.0" text="Choose the paycheck date" />
+                        <Label fx:id="lblWageError" layoutX="492.0" layoutY="386.0" prefHeight="21.0" prefWidth="168.0" text="Wage Must be &gt;= $15" visible="false" />
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab disable="false" text="Paycheck">
+          <Tab fx:id="tabPayCheck" disable="true" text="Paycheck">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -72,20 +73,21 @@
                                     <Label layoutX="129.0" layoutY="61.0" text="Regular Hours Worked :" />
                                     <Label layoutX="129.0" layoutY="87.0" text="Overtime Worked         :" />
                                     <Label layoutX="128.0" layoutY="144.0" text="Taxes                             :" />
-                                    <Label fx:id="lbOvtHrs" layoutX="264.0" layoutY="87.0" prefHeight="17.0" prefWidth="100.0" />
+                                    <Label fx:id="lbOvtHrs" layoutX="287.0" layoutY="87.0" prefHeight="17.0" prefWidth="100.0" />
                                     <Label layoutX="496.0" layoutY="61.0" text="Check Date :" />
-                                    <Label fx:id="lbgrsPay" layoutX="264.0" layoutY="170.0" prefHeight="17.0" prefWidth="100.0" />
+                                    <Label fx:id="lbgrsPay" layoutX="287.0" layoutY="170.0" prefHeight="17.0" prefWidth="100.0" />
                                     <Label layoutX="128.0" layoutY="170.0" text="Gross Pay                      :" />
                                     <Label layoutX="129.0" layoutY="198.0" text="Net Pay                         :   " />
                                     <Label layoutX="264.0" layoutY="144.0" prefHeight="17.0" prefWidth="100.0" />
-                                    <Label fx:id="lblNetPay" layoutX="264.0" layoutY="198.0" prefHeight="17.0" prefWidth="101.0" />
+                                    <Label fx:id="lblNetPayPayStub" layoutX="287.0" layoutY="198.0" prefHeight="17.0" prefWidth="101.0" />
                                     <Label layoutX="497.0" layoutY="87.0" text="Position      :" />
-                                    <Label fx:id="lbHours" layoutX="265.0" layoutY="61.0" prefHeight="17.0" prefWidth="100.0" />
-                                    <Label fx:id="lbTaxes" layoutX="266.0" layoutY="144.0" prefHeight="17.0" prefWidth="100.0" />
-                                    <Label fx:id="lbPosition" layoutX="574.0" layoutY="87.0" prefHeight="17.0" prefWidth="100.0" />
-                                    <Label layoutX="567.0" layoutY="61.0" prefHeight="17.0" prefWidth="100.0" />
-                                    <Label layoutX="129.0" layoutY="114.0" prefHeight="17.0" prefWidth="132.0" text="Pay Rate                       :" />
-                                    <Label fx:id="lbPayRate" layoutX="264.0" layoutY="114.0" prefHeight="17.0" prefWidth="100.0" />
+                                    <Label fx:id="lbHours" layoutX="287.0" layoutY="61.0" prefHeight="17.0" prefWidth="100.0" />
+                                    <Label fx:id="lbTaxes" layoutX="287.0" layoutY="144.0" prefHeight="17.0" prefWidth="100.0" />
+                                    <Label fx:id="lblPosition" layoutX="579.0" layoutY="87.0" prefHeight="17.0" prefWidth="100.0" />
+                                    <Label fx:id="lblCheckDatePayStub" layoutX="579.0" layoutY="61.0" prefHeight="17.0" prefWidth="100.0" />
+                                    <Label layoutX="129.0" layoutY="114.0" prefHeight="21.0" prefWidth="179.0" text="Pay Rate                        :" />
+                                    <Label fx:id="lbPayRate" layoutX="287.0" layoutY="114.0" prefHeight="17.0" prefWidth="100.0" />
+                                    <Label fx:id="lblPayStubName" alignment="CENTER" layoutX="235.0" layoutY="35.0" prefHeight="21.0" prefWidth="324.0" />
                                  </children>
                               </Group>
                               <Group layoutX="-47.0" layoutY="215.0">
@@ -94,12 +96,12 @@
                                     <Label layoutX="124.0" layoutY="114.0" prefHeight="21.0" prefWidth="206.0" text="New York, NY 123456" wrapText="true" />
                                     <Label layoutX="124.0" layoutY="80.0" prefHeight="17.0" prefWidth="295.0" text="Business That Pays People" wrapText="true" />
                                     <Label layoutX="124.0" layoutY="97.0" prefHeight="17.0" prefWidth="295.0" text="2222 Business Boulevard" wrapText="true" />
-                                    <Label fx:id="lblCheckAmountString" alignment="CENTER_RIGHT" layoutX="113.0" layoutY="177.0" prefHeight="20.0" prefWidth="452.0" wrapText="true">
+                                    <Label fx:id="lblCheckAmountString" alignment="CENTER_RIGHT" layoutX="109.0" layoutY="167.0" prefHeight="20.0" prefWidth="452.0" wrapText="true">
                                        <font>
                                           <Font size="12.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="lblNetPay" alignment="CENTER_RIGHT" layoutX="575.0" layoutY="172.0" prefHeight="21.0" prefWidth="96.0">
+                                    <Label fx:id="lblNetPay" alignment="CENTER_RIGHT" layoutX="572.0" layoutY="161.0" prefHeight="21.0" prefWidth="96.0" style="-fx-border-color: black;">
                                        <font>
                                           <Font name="System Bold" size="20.0" />
                                        </font>

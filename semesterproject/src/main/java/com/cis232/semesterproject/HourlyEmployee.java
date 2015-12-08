@@ -1,5 +1,6 @@
 package com.cis232.semesterproject;
 
+//REQ#4 REQ#6
 public class HourlyEmployee extends Employee implements PayableEmployee{
 	
 	double hours;
@@ -34,18 +35,6 @@ public class HourlyEmployee extends Employee implements PayableEmployee{
 		// TODO Auto-generated method stub
 		return getGrossPay()-getTaxes();
 	}
-	
-	public Employee getAllPayable() {
-		return null;
-	}
 
-	public void setGrosspay(double parseDouble) {
-		// TODO Auto-generated method stub
-		
-	}
 
-	public void setNetPay(double parseDouble) {
-		// TODO Auto-generated method stub
-		
-	}
 }

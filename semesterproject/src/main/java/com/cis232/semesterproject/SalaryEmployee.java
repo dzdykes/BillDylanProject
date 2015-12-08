@@ -1,5 +1,6 @@
 package com.cis232.semesterproject;
 
+// REQ#4 REQ#6
 public class SalaryEmployee extends Employee implements PayableEmployee {
 	double hours;
 	

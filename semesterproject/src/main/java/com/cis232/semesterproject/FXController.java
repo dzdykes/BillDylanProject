@@ -16,6 +16,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
@@ -56,9 +57,6 @@ public class FXController {
     private RadioButton rbSalary;
     
     @FXML
-    private Button butLookUp;
-    
-    @FXML
     private Button butEdit;
     
     @FXML
@@ -82,7 +80,8 @@ public class FXController {
     @FXML
     private Label lblCheckDate;
     
-    @FXML DatePicker dpPayDate;
+    @FXML 
+    DatePicker dpPayDate;
     
     @FXML
     private TextField tfOvHrs;
@@ -115,6 +114,24 @@ public class FXController {
     private Label  lbPayRate;
     
     @FXML
+    private Label lblNetPayPayStub;
+    
+    @FXML
+    private Label lblCheckDatePayStub;
+    
+    @FXML
+    private Label lblPosition;
+    
+    @FXML
+    private Label lblPayStubName;
+    
+    @FXML
+    private Tab tabPayCheck;
+    
+    @FXML
+    private Label lblWageError;
+    
+    @FXML
     void rbHourlyListener(ActionEvent event) {
 		populateHourlyEmployee();
     }
@@ -123,45 +140,28 @@ public class FXController {
     void rbSalaryListener(ActionEvent event) {
     	populateSalaryEmployee();
     }
-
-    @FXML
-    void buttonListenerLookUp(ActionEvent event) {
-		try {
-			clearTextFields();
-			
-			String[] a = lvEmployees.getSelectionModel().getSelectedItem().split("-");
-			tfInfoName.setText(a[0].trim());
-			tfInfoId.setText(a[1].trim());
-			
-			final int ID = Integer.parseInt(tfInfoId.getText());
-			
-			tfInfoPos.setText(Environment.getEmployeeStrInfo(ID,"position"));
-			tfInfoStreet.setText(Environment.getEmployeeStrInfo(ID,"street"));
-			tfInfoCSZ.setText(Environment.getCityStateZip(ID));
-			tfInfoPayRate.setText(Environment.getEmployeeStrInfo(ID, "payRate"));
-			
-		} catch (Exception e) {
-			Alert alert;
-			
-			alert = new Alert(AlertType.CONFIRMATION);
-			alert.setTitle("Error Message");
-			alert.setHeaderText("Whoops you did not select an Employee.");
-			alert.setContentText("Try again.");
-			Optional<ButtonType> result = alert.showAndWait();
-			if (result.get() == ButtonType.OK){
-	    	    // ... user chose OK
-	    	} else {
-	    	    // ... user chose CANCEL or closed the dialog
-	    	}
-		}
+    
+    private ArrayList<Employee> employee = new ArrayList<>();
+    
+    // REQ#10
+    public void initialize()
+    {
+    	for(HourlyEmployee e : Environment.getAllHourlyEmployee())
+    	{
+    		employee.add(e);
+    	}
+    	for(SalaryEmployee e: Environment.getAllSalaryEmployee())
+    	{
+    		employee.add(e);
+    	}
     }
     
     @FXML
     private void buttonListenerEdit(ActionEvent event){
-
+    	Employee emp = new Employee();
+    	
     	try
     	{
-	    	Employee emp = new Employee();
 	    	emp.setId(Integer.parseInt(tfInfoId.getText()));
 	    	emp.setName(tfInfoName.getText());
 	    	emp.setPosition(tfInfoPos.getText());
@@ -171,10 +171,10 @@ public class FXController {
 	    	emp.setZip(Environment.getEmployeeStrInfo(emp.getId(), "zip"));
 	    	emp.setPayRate(Double.parseDouble(tfInfoPayRate.getText()));
         	Environment.updateEmployee(emp);
-        	
     		lblEditConfirm.setText("Employee Updated");
-    	}catch(Exception e)
-    	{
+    	}catch(MinimumWageException e){ // REQ#11 REQ#12
+    		lblWageError.setVisible(true);
+    	}catch(Exception e){
     		lblEditConfirm.setText("Error Could Not Update Employee");
     	}
     	
@@ -190,66 +190,85 @@ public class FXController {
     @FXML
     private void buttonListenerCreatePaycheck(ActionEvent event)
     {
-    	LocalDate d = dpPayDate.getValue();
-    	lblCheckDate.setText(d.toString());
-    	
-    	double netPay = 0;
-    	
-    	if(rbHourly.isSelected())
-    	{
-    		HourlyEmployee emp = new HourlyEmployee();
-    		 
-        	emp.setId(Integer.parseInt(tfInfoId.getText()));
-        	emp.setName(tfInfoName.getText());
-        	emp.setPosition(tfInfoPos.getText());
-        	emp.setStreet(tfInfoStreet.getText());
-        	emp.setCity(Environment.getEmployeeStrInfo(emp.getId(), "city"));
-        	emp.setState(Environment.getEmployeeStrInfo(emp.getId(), "state"));
-        	emp.setZip(Environment.getEmployeeStrInfo(emp.getId(), "zip"));
-        	emp.setPayRate(Double.parseDouble(tfInfoPayRate.getText()));
-        	lbHours.setText(emp.getHours()+"");
-        	lbPayRate.setText(emp.getPayRate()+"");
-        	lbgrsPay.setText(emp.getGrossPay()+"");
-        	lblNetPay.setText(emp.getNetPay()+"");
+    	tabPayCheck.setDisable(false);
+    	try{
+    		LocalDate d = dpPayDate.getValue();
+        	lblCheckDate.setText(d.toString());
+        	lblPayStubName.setText("Pay Stub for " + tfInfoName.getText());
         	
+        	double netPay = 0;
         	
-        	double hours = Double.parseDouble(tfHours.getText());
-        	
-        	emp.setHours(hours);
-        	
-        	netPay = emp.getNetPay();
-    	}else if(rbSalary.isSelected())
-    	{
-    		SalaryEmployee emp = new SalaryEmployee();
-    		 
-        	emp.setId(Integer.parseInt(tfInfoId.getText()));
-        	emp.setName(tfInfoName.getText());
-        	emp.setPosition(tfInfoPos.getText());
-        	emp.setStreet(tfInfoStreet.getText());
-        	emp.setCity(Environment.getEmployeeStrInfo(emp.getId(), "city"));
-        	emp.setState(Environment.getEmployeeStrInfo(emp.getId(), "state"));
-        	emp.setZip(Environment.getEmployeeStrInfo(emp.getId(), "zip"));
-        	emp.setPayRate(Double.parseDouble(tfInfoPayRate.getText()));
-        	
-        	double hours = Double.parseDouble(tfHours.getText());
-        	
-        	emp.setHours(hours);
-        	
-        	netPay = emp.getNetPay();
-    	}
+        	if(rbHourly.isSelected())
+        	{
+        		HourlyEmployee emp = new HourlyEmployee();
+        		 
+            	emp.setId(Integer.parseInt(tfInfoId.getText()));
+            	emp.setName(tfInfoName.getText());
+            	emp.setPosition(tfInfoPos.getText());
+            	emp.setStreet(tfInfoStreet.getText());
+            	emp.setCity(Environment.getEmployeeStrInfo(emp.getId(), "city"));
+            	emp.setState(Environment.getEmployeeStrInfo(emp.getId(), "state"));
+            	emp.setZip(Environment.getEmployeeStrInfo(emp.getId(), "zip"));
+            	emp.setPayRate(Double.parseDouble(tfInfoPayRate.getText()));
+            	emp.setHours(Double.parseDouble(tfHours.getText()));
+            	if(emp.getHours()>70)
+            	{
+                	lbOvtHrs.setText(String.format("%.2f", emp.getHours()-70));
+            	}
+            	lbHours.setText(emp.getHours()+"");
+            	lbPayRate.setText(String.format("%.2f", emp.getPayRate()));
+            	lbgrsPay.setText(String.format("%.2f", emp.getGrossPay()));
+            	lblNetPayPayStub.setText(String.format("%.2f", emp.getNetPay()));
+            	lbTaxes.setText(String.format("%.2f", emp.getTaxes()));
+            	lblCheckDatePayStub.setText(d.toString());
+            	lblPosition.setText(tfInfoPos.getText());
+            	
+            	netPay = emp.getNetPay();
+        	}else if(rbSalary.isSelected())
+        	{
+        		SalaryEmployee emp = new SalaryEmployee();
+        		 
+            	emp.setId(Integer.parseInt(tfInfoId.getText()));
+            	emp.setName(tfInfoName.getText());
+            	emp.setPosition(tfInfoPos.getText());
+            	emp.setStreet(tfInfoStreet.getText());
+            	emp.setCity(Environment.getEmployeeStrInfo(emp.getId(), "city"));
+            	emp.setState(Environment.getEmployeeStrInfo(emp.getId(), "state"));
+            	emp.setZip(Environment.getEmployeeStrInfo(emp.getId(), "zip"));
+            	emp.setPayRate(Double.parseDouble(tfInfoPayRate.getText()));
+            	emp.setHours(Double.parseDouble(tfHours.getText()));
+            	if(emp.getHours()>100)
+            	{
+                	lbOvtHrs.setText(String.format("%.2f", emp.getHours()-100));
+            	}
+            	lbHours.setText(emp.getHours()+"");
+            	lbPayRate.setText(String.format("%.2f", emp.getPayRate()));
+            	lbgrsPay.setText(String.format("%.2f", emp.getGrossPay()));
+            	lblNetPayPayStub.setText(String.format("%.2f", emp.getNetPay()));
+            	lbTaxes.setText(String.format("%.2f", emp.getTaxes()));
+            	lblCheckDatePayStub.setText(d.toString());
+            	lblPosition.setText(tfInfoPos.getText());
+            	
+            	netPay = emp.getNetPay();
+        	}
 
-    	lblName.setText(tfInfoName.getText());
-    	lblStreet.setText(tfInfoStreet.getText());
-    	lblCSZ.setText(tfInfoCSZ.getText());
-    	lblNetPay.setText(String.format("%.2f", netPay));
-    	
-    	lblCheckAmountString.setText(CheckWriter.main(String.format("%.2f", netPay)));
+        	lblName.setText(tfInfoName.getText());
+        	lblStreet.setText(tfInfoStreet.getText());
+        	lblCSZ.setText(tfInfoCSZ.getText());
+        	lblNetPay.setText(String.format("%.2f", netPay));
+        	
+        	lblCheckAmountString.setText(CheckWriter.main(String.format("%.2f", netPay)));
+    	}catch(Exception e)
+    	{
+    		
+    	}
     }
     
     @FXML
     private void lvListenerGetEmployeeInfo(MouseEvent event)
     {
     	try {
+			tabPayCheck.setDisable(true);
 			clearTextFields();
 			
 			String[] a = lvEmployees.getSelectionModel().getSelectedItem().split("-");
@@ -261,7 +280,7 @@ public class FXController {
 			tfInfoPos.setText(Environment.getEmployeeStrInfo(ID,"position"));
 			tfInfoStreet.setText(Environment.getEmployeeStrInfo(ID,"street"));
 			tfInfoCSZ.setText(Environment.getCityStateZip(ID));
-			tfInfoPayRate.setText(Environment.getEmployeeStrInfo(ID, "payRate"));
+			tfInfoPayRate.setText(String.format("%.2f", Double.parseDouble(Environment.getEmployeeStrInfo(ID, "payRate"))));
 			
 		} catch (Exception e) {
 			Alert alert;
@@ -277,31 +296,38 @@ public class FXController {
 	    	    // ... user chose CANCEL or closed the dialog
 	    	}
 		}
-    	
     }
-    
+
+    // REQ#10
     private void populateHourlyEmployee()
     {
     	ArrayList<String> empName = new ArrayList<>();
-		for(Employee e : Environment.getAllHourlyEmployee())
+		for(Employee e : employee)
 		{
-			empName.add(e.getName() + " - " + e.getId());
-		}
-		ObservableList<String> list = FXCollections.observableArrayList(empName);
-		lvEmployees.setItems(list);
-    }
-    
-    private void populateSalaryEmployee()
-    {
-    	ArrayList<String> empName = new ArrayList<>();
-		for(Employee e : Environment.getAllSalaryEmployee())
-		{
-			empName.add(e.getName() + " - " + e.getId());
+			if(e instanceof HourlyEmployee)
+			{
+				empName.add(e.getName() + " - " + e.getId());
+			}
 		}
 		ObservableList<String> list = FXCollections.observableArrayList(empName);
 		lvEmployees.setItems(list);
     }
 
+    // REQ#10
+    private void populateSalaryEmployee()
+    {
+    	ArrayList<String> empName = new ArrayList<>();
+		for(Employee e : employee)
+		{
+			if(e instanceof SalaryEmployee)
+			{
+				empName.add(e.getName() + " - " + e.getId());
+			}
+		}
+		ObservableList<String> list = FXCollections.observableArrayList(empName);
+		lvEmployees.setItems(list);
+    }
+    
 	private void clearTextFields() {
 		tfInfoId.clear();
     	tfInfoPos.clear();
@@ -311,5 +337,6 @@ public class FXController {
     	tfInfoPayRate.clear();
     	tfHours.clear();
     	lblEditConfirm.setText("");
+    	lblWageError.setVisible(false);
 	}
 }

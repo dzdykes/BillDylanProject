@@ -1,5 +1,6 @@
 package com.cis232.semesterproject;
 
+// REQ#5
 public class Employee {
 	int id;
 	String name;
@@ -103,8 +104,12 @@ public class Employee {
 		this.zip = zip;
 	}
 	
-	public void setPayRate(double payRate)
+	public void setPayRate(double payRate) throws MinimumWageException
 	{
+		if(payRate<15)
+    	{
+    		throw new MinimumWageException(payRate);
+    	}
 		this.payRate = payRate;
 	}
 

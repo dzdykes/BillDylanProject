@@ -19,19 +19,21 @@ public class App extends Application
 		
 	try {
 			//Load the FXML file
+			// REQ#9
 			Parent parent = FXMLLoader.load(getClass().getResource("EmployeeEdit.fxml"));
 		
 			//Set up a scene using the FXML file
 			Scene scene = new Scene(parent);
 		
 			//Set up our stage using the scene
-			stage.setTitle("Edit/Find Employee");
+			stage.setTitle("Bill and Dylan Semester Project"); // REQ#1
 			stage.setScene(scene);
 //			scene.getStylesheets().add
 //			 (App.class.getResource("styles.css").toExternalForm());
 			stage.show();
 		} catch (IOException e) {
 			System.out.println("Problem loading fxml file.");
+			e.printStackTrace();
 		}
 	}
 

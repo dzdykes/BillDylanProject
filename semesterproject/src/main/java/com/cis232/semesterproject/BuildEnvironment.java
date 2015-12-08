@@ -64,7 +64,7 @@ public class BuildEnvironment {
 			}
 			//Close the connection to the database
 			conn.close();
-		} catch (SQLException e) {
+		} catch (SQLException | MinimumWageException e) {
 			System.out.println("Error could not create the table.");
 		}
 	}

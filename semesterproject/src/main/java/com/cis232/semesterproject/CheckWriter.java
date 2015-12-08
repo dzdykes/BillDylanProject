@@ -15,7 +15,7 @@ public class CheckWriter {
 		}
 		
 		//Tokenize the string in order to spilt up dollars and cents
-		StringTokenizer amountSplit = new StringTokenizer(amount,".");
+		StringTokenizer amountSplit = new StringTokenizer(amount,"."); // REQ#2
 		String strDollars = amountSplit.nextToken();
 		String strCents = amountSplit.nextToken();
 		

@@ -13,11 +13,11 @@ import javafx.scene.control.TextField;
 public class Environment extends FXController {
 	final static String DB_URL = "jdbc:derby:Personnel/Employee;create=true";
 	
-	//This method will find an employee based on their Employee ID
-	public static ArrayList<Employee> getAllHourlyEmployee()
+	// REQ#8
+	public static ArrayList<HourlyEmployee> getAllHourlyEmployee()
 	{
 		try {	
-			ArrayList<Employee> hourlyEmp = new ArrayList<>();
+			ArrayList<HourlyEmployee> hourlyEmp = new ArrayList<>();
 			
 			Connection conn = DriverManager.getConnection(DB_URL);
 			
@@ -30,7 +30,7 @@ public class Environment extends FXController {
 			
 			while(results.next())
 			{
-				Employee emp = new Employee();
+				HourlyEmployee emp = new HourlyEmployee();
 				emp.setId(results.getInt("id"));
 				emp.setName(results.getString("name"));
 				hourlyEmp.add(emp);
@@ -45,10 +45,10 @@ public class Environment extends FXController {
 		}
 	}
 	
-	public static ArrayList<Employee> getAllSalaryEmployee()
+	public static ArrayList<SalaryEmployee> getAllSalaryEmployee()
 	{
 		try {	
-			ArrayList<Employee> salaryEmp = new ArrayList<>();
+			ArrayList<SalaryEmployee> salaryEmp = new ArrayList<>();
 			
 			Connection conn = DriverManager.getConnection(DB_URL);
 			
@@ -61,7 +61,7 @@ public class Environment extends FXController {
 			
 			while(results.next())
 			{
-				Employee emp = new Employee();
+				SalaryEmployee emp = new SalaryEmployee();
 				emp.setId(results.getInt("id"));
 				emp.setName(results.getString("name"));
 				salaryEmp.add(emp);
@@ -120,6 +120,7 @@ public class Environment extends FXController {
 	}
 	
 	//This class will add an employee into the Employee table
+	// REQ#7
     public static void addEmployee(Employee emp, boolean isHourly){
 		try {
 			//Insert employees to the Employee table
