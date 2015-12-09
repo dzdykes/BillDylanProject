@@ -20,9 +20,9 @@ public class SalaryEmployee extends Employee implements PayableEmployee {
 		double bonus=0.0;
 		if(hours>=100)
 		{
-			bonus=(payRate/52)*.2;
+			bonus=(payRate/26)*.2;
 		}
-		return ((payRate/52) + bonus);
+		return ((payRate/26) + bonus);
 	}
 
 	@Override

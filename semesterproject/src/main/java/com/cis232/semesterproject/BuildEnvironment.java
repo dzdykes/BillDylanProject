@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Random;
 
 public class BuildEnvironment {
 	//Create and load the database
@@ -13,6 +14,8 @@ public class BuildEnvironment {
 			//Create connection to database
 			Connection conn = DriverManager.getConnection(Environment.DB_URL);
 			System.out.println("Connected to database!");
+			
+			Random rn = new Random();
 			
 			Statement stmt = conn.createStatement();
 			
@@ -46,7 +49,7 @@ public class BuildEnvironment {
 			for(int i = 1; i<15; i++)
 			{
 				Employee newEmp = new HourlyEmployee();
-				newEmp.setId(i);
+				newEmp.setId(rn.nextInt(25000)+10000);
 				newEmp.setName("Employee ");
 				newEmp.setPosition("Cashier");
 				newEmp.setStreet("TestStreet St");
@@ -59,7 +62,7 @@ public class BuildEnvironment {
 			
 			for(int i = 15; i<21; i++)
 			{
-				Employee newEmp = new Employee(i, "Semployee ", "Cashier", "TestStreet St", "TestCityVille", "TS", "55555-5555", 300000.00);
+				Employee newEmp = new Employee(rn.nextInt(25000)+10000, "Semployee ", "Cashier", "TestStreet St", "TestCityVille", "TS", "55555-5555", 300000.00);
 				Environment.addEmployee(newEmp, false);
 			}
 			//Close the connection to the database

@@ -168,10 +168,12 @@ public class FXController {
 	    	emp.setName(tfInfoName.getText());
 	    	emp.setPosition(tfInfoPos.getText());
 	    	emp.setStreet(tfInfoStreet.getText());
-	    	StringTokenizer tokens = new StringTokenizer(tfInfoCSZ.getText(), " "); // REQ#2
-	    	emp.setCity(tokens.nextToken().toString());
-	    	emp.setState(tokens.nextToken().toString().replace(",", ""));
-	    	emp.setZip(tokens.nextToken().toString());
+	    	StringTokenizer tokens = new StringTokenizer(tfInfoCSZ.getText(), ","); // REQ#2
+	    	String cityState = tokens.nextToken().toString();
+	    	String zip = tokens.nextToken();
+	    	emp.setCity(cityState.substring(0, cityState.length()-3));
+	    	emp.setState(cityState.substring(cityState.length()-2));
+	    	emp.setZip(zip);
 	    	emp.setPayRate(Double.parseDouble(tfInfoPayRate.getText()));
         	Environment.updateEmployee(emp);
     		lblEditConfirm.setText("Employee Updated");
