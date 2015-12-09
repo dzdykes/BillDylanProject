@@ -3,6 +3,7 @@ package com.cis232.semesterproject;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.StringTokenizer;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -146,6 +147,7 @@ public class FXController {
     // REQ#10
     public void initialize()
     {
+    	employee.clear();
     	for(HourlyEmployee e : Environment.getAllHourlyEmployee())
     	{
     		employee.add(e);
@@ -166,9 +168,10 @@ public class FXController {
 	    	emp.setName(tfInfoName.getText());
 	    	emp.setPosition(tfInfoPos.getText());
 	    	emp.setStreet(tfInfoStreet.getText());
-	    	emp.setCity(Environment.getEmployeeStrInfo(emp.getId(), "city"));
-	    	emp.setState(Environment.getEmployeeStrInfo(emp.getId(), "state"));
-	    	emp.setZip(Environment.getEmployeeStrInfo(emp.getId(), "zip"));
+	    	StringTokenizer tokens = new StringTokenizer(tfInfoCSZ.getText(), " "); // REQ#2
+	    	emp.setCity(tokens.nextToken().toString());
+	    	emp.setState(tokens.nextToken().toString().replace(",", ""));
+	    	emp.setZip(tokens.nextToken().toString());
 	    	emp.setPayRate(Double.parseDouble(tfInfoPayRate.getText()));
         	Environment.updateEmployee(emp);
     		lblEditConfirm.setText("Employee Updated");
@@ -180,9 +183,11 @@ public class FXController {
     	
     	if(rbHourly.isSelected())
     	{
+    		initialize();
     		populateHourlyEmployee();
     	}else if(rbSalary.isSelected())
     	{
+    		initialize();
     		populateSalaryEmployee();
     	}
     }
@@ -272,11 +277,11 @@ public class FXController {
 			clearTextFields();
 			
 			String[] a = lvEmployees.getSelectionModel().getSelectedItem().split("-");
-			tfInfoName.setText(a[0].trim());
 			tfInfoId.setText(a[1].trim());
 			
 			final int ID = Integer.parseInt(tfInfoId.getText());
 			
+			tfInfoName.setText(Environment.getEmployeeStrInfo(ID, "name"));
 			tfInfoPos.setText(Environment.getEmployeeStrInfo(ID,"position"));
 			tfInfoStreet.setText(Environment.getEmployeeStrInfo(ID,"street"));
 			tfInfoCSZ.setText(Environment.getCityStateZip(ID));

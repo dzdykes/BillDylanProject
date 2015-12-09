@@ -26,7 +26,7 @@ public class App extends Application
 			Scene scene = new Scene(parent);
 		
 			//Set up our stage using the scene
-			stage.setTitle("Bill and Dylan Semester Project"); // REQ#1
+			stage.setTitle("Bill Freeman and Dylan Dykes Semester Project"); // REQ#1
 			stage.setScene(scene);
 //			scene.getStylesheets().add
 //			 (App.class.getResource("styles.css").toExternalForm());
