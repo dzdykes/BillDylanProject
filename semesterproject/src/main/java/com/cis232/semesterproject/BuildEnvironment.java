@@ -46,10 +46,12 @@ public class BuildEnvironment {
 
 			System.out.println("Employee table created.");
 			
+			int[] empId = randomId2d(21);
+			
 			for(int i = 1; i<15; i++)
 			{
 				Employee newEmp = new HourlyEmployee();
-				newEmp.setId(rn.nextInt(25000)+10000);
+				newEmp.setId(empId[i-1]);
 				newEmp.setName("Employee ");
 				newEmp.setPosition("Cashier");
 				newEmp.setStreet("TestStreet St");
@@ -62,7 +64,7 @@ public class BuildEnvironment {
 			
 			for(int i = 15; i<21; i++)
 			{
-				Employee newEmp = new Employee(rn.nextInt(25000)+10000, "Semployee ", "Cashier", "TestStreet St", "TestCityVille", "TS", "55555-5555", 300000.00);
+				Employee newEmp = new Employee(empId[i], "Semployee ", "Cashier", "TestStreet St", "TestCityVille", "TS", "55555-5555", 70000.00);
 				Environment.addEmployee(newEmp, false);
 			}
 			//Close the connection to the database
@@ -70,5 +72,30 @@ public class BuildEnvironment {
 		} catch (SQLException | MinimumWageException e) {
 			System.out.println("Error could not create the table.");
 		}
+	}
+
+	static Random rn = new Random();
+	
+	public static int[] randomId2d(int n)
+	{
+		int[] ints = new int[n];
+		return randomId(0, n, ints);
+	}
+
+	private static int[] randomId(int m, int n, int[] ints) {
+		
+		int x = rn.nextInt(85000)+12345;
+		
+		if(m==n) {return ints;}
+		if(m==0) {
+			ints[0]=x;
+		}
+		for(int i=0; i<m; i++)
+		{
+			if(ints[i]==x){return randomId(m, n, ints);}
+		}
+		ints[m] = x;
+		m++;
+		return randomId(m, n, ints);
 	}
 }

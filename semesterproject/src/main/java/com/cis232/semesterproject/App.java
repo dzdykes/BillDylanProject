@@ -28,8 +28,6 @@ public class App extends Application
 			//Set up our stage using the scene
 			stage.setTitle("Bill Freeman and Dylan Dykes Semester Project"); // REQ#1
 			stage.setScene(scene);
-//			scene.getStylesheets().add
-//			 (App.class.getResource("styles.css").toExternalForm());
 			stage.show();
 		} catch (IOException e) {
 			System.out.println("Problem loading fxml file.");
@@ -38,7 +36,7 @@ public class App extends Application
 	}
 
 	public static void main(String[] args) {
-		if(false)
+		if(true)
 		{
 			BuildEnvironment.createEmployeeTable();
 		}
